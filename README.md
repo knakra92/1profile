@@ -86,3 +86,7 @@ When the key is missing or rejected, or the API is overloaded, AI endpoints retu
   PHI this needs a BAA-covered endpoint (e.g. Vertex AI under a HIPAA BAA) or a self-hosted Gemma deployment;
   the client is isolated in `backend/app/agents/llm.py`.
 - **Interop:** FHIR import/export for medical sections; QR share codes with short-lived rotating tokens.
+
+## License
+
+MIT, see [LICENSE](LICENSE). The Expo app template in `mobile/` keeps its own MIT notice in `mobile/LICENSE`.
