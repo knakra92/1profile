@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.expo/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# local data and secrets
+backend/oneprofile.db
+backend/.dev_field_key
+.env
+.env.*
