@@ -187,7 +187,7 @@ input.code-input { font-size: 21px; font-weight: 600; letter-spacing: 0.08em; }
 .allergy.unknown { background: var(--pending-wash); border-color: var(--pending); color: #5c3c00; }
 
 .ph-body { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 48px; margin-top: 40px; align-items: start; }
-.ph-rail { position: sticky; top: calc(var(--topbar) + 140px); max-height: calc(100vh - var(--topbar) - 160px); display: flex; flex-direction: column; }
+.ph-rail { position: sticky; top: calc(var(--topbar) + 160px); max-height: calc(100vh - var(--topbar) - 180px); display: flex; flex-direction: column; }
 
 .ledger { border-top: 1px solid var(--ink); }
 .lrow { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--rule); scroll-margin-top: calc(var(--topbar) + 150px); position: relative; }
