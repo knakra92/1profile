@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1Profile demo</title>
+<meta name="description" content="Screenshots of 1Profile: a member iOS app and a provider portal for sharing personal details section by section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@200..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f5f6f8; --surface: #fff; --ink: #161a2b; --ink-2: #3c4256; --graphite: #6b7083;
+    --rule: #e2e4ea; --seal: #d9dbe3; --sign: #3a36b0; --sign-wash: #ecebfa;
+    color-scheme: light;
+    font-family: 'Public Sans', 'Helvetica Neue', Arial, system-ui, sans-serif;
+    color: var(--ink); background: var(--paper); line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); }
+  a { color: var(--sign); text-underline-offset: 3px; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+  header { padding: 72px 0 40px; }
+  .mark { display: inline-flex; gap: 3px; margin-bottom: 28px; }
+  .mark i { width: 6px; height: 22px; border-radius: 1px; background: var(--sign); }
+  .mark i:last-child { background: repeating-linear-gradient(135deg, var(--seal) 0 2px, transparent 2px 4px); box-shadow: inset 0 0 0 1px var(--seal); }
+  h1 { font-size: clamp(44px, 7vw, 88px); font-weight: 200; letter-spacing: -0.045em; line-height: 0.98; margin: 0; }
+  .lede { font-size: 19px; color: var(--ink-2); max-width: 58ch; margin: 22px 0 0; }
+  .links { margin-top: 22px; display: flex; gap: 20px; flex-wrap: wrap; font-weight: 600; }
+
+  section { padding: 48px 0 24px; border-top: 1px solid var(--ink); margin-top: 24px; }
+  h2 { font-size: 28px; font-weight: 300; letter-spacing: -0.02em; margin: 0; }
+  .sub { color: var(--graphite); margin: 6px 0 32px; max-width: 64ch; }
+
+  .grid { display: grid; gap: 40px 28px; list-style: none; padding: 0; margin: 0; }
+  .phones { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .screens { grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); }
+  .grid button {
+    display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in;
+    border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px var(--rule), 0 18px 36px -24px rgba(22, 26, 43, .35);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .phones button { border-radius: 26px; }
+  .grid button:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px var(--sign), 0 22px 40px -24px rgba(22, 26, 43, .4); }
+  .grid button:focus-visible { outline: 3px solid var(--sign); outline-offset: 3px; }
+  .grid img { display: block; width: 100%; height: auto; background: var(--surface); }
+  .cap { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin-top: 14px; }
+  .cap b { font-weight: 200; font-size: 26px; line-height: 1; color: var(--sign); grid-row: span 2; }
+  .cap strong { font-weight: 600; font-size: 16px; }
+  .cap span { color: var(--graphite); font-size: 14px; }
+
+  footer { padding: 56px 0 72px; color: var(--graphite); font-size: 14px; }
+
+  dialog { border: 0; padding: 0; background: transparent; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; }
+  dialog::backdrop { background: rgba(22, 26, 43, .97); }
+  .viewer { width: 100%; height: 100%; display: grid; grid-template-rows: 1fr auto; gap: 14px; padding: 24px; }
+  .viewer figure { margin: 0; min-height: 0; display: grid; place-items: center; }
+  /* Leave room for the caption bar below; percentage heights don't resolve reliably inside <dialog>. */
+  .viewer img { max-width: 100%; max-height: calc(100vh - 130px); object-fit: contain; border-radius: 12px; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; color: #e9eaf2; }
+  .bar p { margin: 0; }
+  .bar span { color: #aeb0c4; }
+  .bar nav { display: flex; gap: 8px; flex: none; }
+  .bar button { font: inherit; font-weight: 600; color: #fff; background: rgba(255, 255, 255, .12); border: 0; border-radius: 8px; padding: 9px 14px; cursor: pointer; }
+  .bar button:hover { background: rgba(255, 255, 255, .22); }
+  @media (max-width: 640px) { .bar { flex-direction: column; align-items: stretch; } .bar nav { justify-content: space-between; } }
+  @media (prefers-reduced-motion: reduce) { .grid button { transition: none; } .grid button:hover { transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mark" aria-hidden="true"><i></i><i></i><i></i></div>
+    <h1>1Profile, working end to end</h1>
+    <p class="lede">
+      People keep one profile and approve each section a hospital, clinic or bank asks for. These screens follow
+      one request from start to finish: Northside Family Clinic asks Alex for seven sections, Alex shares five,
+      and the clinic sees exactly those five.
+    </p>
+    <p class="links"><a href="https://github.com/knakra92/1profile">Source code on GitHub</a></p>
+  </header>
+
+  <section aria-labelledby="app">
+    <h2 id="app">iOS app, for the person sharing</h2>
+    <p class="sub">Alex Morgan’s phone. The AI answers come from Gemma 4, reading only Alex’s own records.</p>
+    <ol class="grid phones" data-set>
+      <li><button data-src="mobile-1-home.png"><img src="mobile-1-home.png" alt="Home screen with share code ALEX-2026, one access request waiting, next appointment and $97.20 due" loading="lazy" width="645" height="1398"></button>
+        <div class="cap"><b>1</b><strong>Home</strong><span>Share code, a waiting request, next visit and bills</span></div></li>
+      <li><button data-src="mobile-2-access-request.png"><img src="mobile-2-access-request.png" alt="Northside Family Clinic's request, with a switch for each section" loading="lazy" width="645" height="1398"></button>
+        <div class="cap"><b>2</b><strong>A request arrives</strong><span>One switch per section, plus the clinic’s reason</span></div></li>
+      <li><button data-src="mobile-3-profile.png"><img src="mobile-3-profile.png" alt="Profile sections, each showing how many organizations can see it" loading="lazy" width="645" height="1398"></button>
+        <div class="cap"><b>3</b><strong>One profile</strong><span>Each section shows who can see it</span></div></li>
+      <li><button data-src="mobile-4-profile-payment.png"><img src="mobile-4-profile-payment.png" alt="Card on file showing only Visa ending 4242" loading="lazy" width="645" height="1398"></button>
+        <div class="cap"><b>4</b><strong>Card on file</strong><span>Only the brand and last four digits are stored</span></div></li>
+      <li><button data-src="mobile-5-bills.png"><img src="mobile-5-bills.png" alt="Bills with insurance coverage and amount owed" loading="lazy" width="645" height="1398"></button>
+        <div class="cap"><b>5</b><strong>Bills</strong><span>What insurance covered and what’s left to pay</span></div></li>
+      <li><button data-src="mobile-6-lab-results.png"><img src="mobile-6-lab-results.png" alt="Lab results with high and low values flagged" loading="lazy" width="645" height="1398"></button>
+        <div class="cap"><b>6</b><strong>Lab results</strong><span>Out-of-range values flagged</span></div></li>
+      <li><button data-src="mobile-7-assistant.png"><img src="mobile-7-assistant.png" alt="AI assistant explaining the lab results in plain language" loading="lazy" width="645" height="1398"></button>
+        <div class="cap"><b>7</b><strong>Assistant</strong><span>Gemma explains the results in plain language</span></div></li>
+      <li><button data-src="mobile-8-access-shared.png"><img src="mobile-8-access-shared.png" alt="Access screen showing Northside can now see five sections" loading="lazy" width="645" height="1398"></button>
+        <div class="cap"><b>8</b><strong>After approving</strong><span>Northside sees five sections; each can be removed</span></div></li>
+      <li><button data-src="mobile-9-activity-log.png"><img src="mobile-9-activity-log.png" alt="Activity log listing every view, request and AI summary" loading="lazy" width="645" height="1398"></button>
+        <div class="cap"><b>9</b><strong>Activity log</strong><span>Who viewed what, and when</span></div></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="portal">
+    <h2 id="portal">Provider portal, for hospitals and clinics</h2>
+    <p class="sub">The bar on each patient shows which of the 11 sections were shared. Solid is shared; hatched stayed private.</p>
+    <ol class="grid screens" data-set>
+      <li><button data-src="portal-1-sign-in.png"><img src="portal-1-sign-in.png" alt="Portal sign-in page" loading="lazy" width="1440" height="900"></button>
+        <div class="cap"><b>1</b><strong>Sign in</strong><span>Staff sign in to their organization</span></div></li>
+      <li><button data-src="portal-2-how-sharing-works.png"><img src="portal-2-how-sharing-works.png" alt="Three-step explanation of how sharing works with a phone preview" loading="lazy" width="1440" height="900"></button>
+        <div class="cap"><b>2</b><strong>How sharing works</strong><span>Request, the patient decides, you see what they approved</span></div></li>
+      <li><button data-src="portal-3-patients.png"><img src="portal-3-patients.png" alt="St. Mary's patient list with a consent bar per patient" loading="lazy" width="1440" height="900"></button>
+        <div class="cap"><b>3</b><strong>Patients</strong><span>St. Mary’s sees who shares with them, and how much</span></div></li>
+      <li><button data-src="portal-4-patient-record.png"><img src="portal-4-patient-record.png" alt="Patient record with the allergy alert pinned" loading="lazy" width="1440" height="900"></button>
+        <div class="cap"><b>4</b><strong>Patient record</strong><span>Allergies stay pinned while you scroll</span></div></li>
+      <li><button data-src="portal-5-withheld-sections.png"><img src="portal-5-withheld-sections.png" alt="Withheld sections shown as hatched boxes" loading="lazy" width="1440" height="900"></button>
+        <div class="cap"><b>5</b><strong>Withheld sections</strong><span>Private sections stay visible as sealed gaps</span></div></li>
+      <li><button data-src="portal-6-ai-pre-visit-brief.png"><img src="portal-6-ai-pre-visit-brief.png" alt="AI pre-visit brief listing safety alerts and abnormal labs" loading="lazy" width="1440" height="900"></button>
+        <div class="cap"><b>6</b><strong>Pre-visit brief</strong><span>Gemma summarises only what the patient shared</span></div></li>
+      <li><button data-src="portal-7-records.png"><img src="portal-7-records.png" alt="Appointments, bills and lab results from the hospital" loading="lazy" width="1440" height="900"></button>
+        <div class="cap"><b>7</b><strong>Hospital records</strong><span>Appointments, bills and lab results the hospital adds</span></div></li>
+      <li><button data-src="portal-8-request-access.png"><img src="portal-8-request-access.png" alt="Request form with a live preview of the patient's phone" loading="lazy" width="1440" height="900"></button>
+        <div class="cap"><b>8</b><strong>Requesting access</strong><span>A live preview of what the patient will see</span></div></li>
+      <li><button data-src="portal-9-request-pending.png"><img src="portal-9-request-pending.png" alt="Northside's request waiting for the patient" loading="lazy" width="1440" height="900"></button>
+        <div class="cap"><b>9</b><strong>Waiting</strong><span>Northside’s request, before Alex answers</span></div></li>
+      <li><button data-src="portal-10-request-partly-approved.png"><img src="portal-10-request-partly-approved.png" alt="Request marked partly approved with two declined sections struck through" loading="lazy" width="1440" height="900"></button>
+        <div class="cap"><b>10</b><strong>Partly approved</strong><span>Two sections declined, struck through in red</span></div></li>
+      <li><button data-src="portal-11-clinic-sees-only-approved.png"><img src="portal-11-clinic-sees-only-approved.png" alt="Northside's view of Alex showing 5 of 11 sections" loading="lazy" width="1440" height="900"></button>
+        <div class="cap"><b>11</b><strong>Only what was approved</strong><span>Northside opens exactly the five sections Alex shared</span></div></li>
+    </ol>
+  </section>
+
+  <footer>Built with FastAPI, React Native (Expo), React and Gemma 4. MIT licensed.</footer>
+</div>
+
+<dialog id="viewer" aria-label="Screenshot viewer">
+  <div class="viewer">
+    <figure><img id="v-img" alt=""></figure>
+    <div class="bar">
+      <p><strong id="v-title"></strong> <span id="v-text"></span></p>
+      <nav>
+        <button id="v-prev" type="button">Previous</button>
+        <button id="v-next" type="button">Next</button>
+        <button id="v-close" type="button">Close</button>
+      </nav>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('viewer');
+  const img = document.getElementById('v-img');
+  const items = [...document.querySelectorAll('[data-set] button')];
+  let current = 0;
+
+  function show(i) {
+    current = (i + items.length) % items.length;
+    const btn = items[current];
+    const cap = btn.parentElement.querySelector('.cap');
+    img.src = btn.dataset.src;
+    img.alt = btn.querySelector('img').alt;
+    document.getElementById('v-title').textContent = cap.querySelector('strong').textContent + '.';
+    document.getElementById('v-text').textContent = cap.querySelector('span').textContent;
+  }
+
+  items.forEach((btn, i) => btn.addEventListener('click', () => { show(i); dialog.showModal(); }));
+  document.getElementById('v-prev').onclick = () => show(current - 1);
+  document.getElementById('v-next').onclick = () => show(current + 1);
+  document.getElementById('v-close').onclick = () => dialog.close();
+  dialog.addEventListener('click', (e) => { if (e.target === dialog || e.target.tagName === 'FIGURE') dialog.close(); });
+  dialog.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') show(current + 1);
+    if (e.key === 'ArrowLeft') show(current - 1);
+  });
+</script>
+</body>
+</html>
